@@ -13,7 +13,7 @@ const MainMenu = () => {
   useEffect(() => {
     const readTasks = async () => {
       try {
-        const response = await fetch("items/");
+        const response = await fetch("/items/");
         if (!response.ok) throw Error("Did not receive expected data");
         const fetchTasks = await response.json();
         setTasks(fetchTasks);
@@ -51,7 +51,7 @@ const MainMenu = () => {
         content: myItem[0].content,
       }),
     };
-    const result = await apiRequest(`items/${newTaskUpdate.id}`, updateOptions);
+    const result = await apiRequest(`/items/${newTaskUpdate.id}`, updateOptions);
     if (result) setFetchError(result);
   };
 
@@ -79,7 +79,7 @@ const MainMenu = () => {
       },
       body: JSON.stringify(addTask),
     };
-    const result = await apiRequest(`users/1/items`, postOptions);
+    const result = await apiRequest(`/users/1/items/`, postOptions);
     if (result) setFetchError(result);
   };
 
@@ -95,7 +95,7 @@ const MainMenu = () => {
     setTasks(NewList);
 
     const deleteOptions = { method: "DELETE" };
-    const reqUrl = `items/${item_id}`;
+    const reqUrl = `/items/${item_id}`;
     const result = await apiRequest(reqUrl, deleteOptions);
     if (result) setFetchError(result);
   };

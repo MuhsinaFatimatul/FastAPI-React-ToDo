@@ -5,3 +5,4 @@ python-multipart
 SQLAlchemy
 uvicorn[standard]
 pydantic
+psycopg2-binary

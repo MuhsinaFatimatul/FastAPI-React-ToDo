@@ -11,6 +11,16 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+@app.on_event("startup")
+def seed_default_user():
+    db = SessionLocal()
+    try:
+        if not db.query(models.User).filter(models.User.id == 1).first():
+            db.add(models.User(email="default@todo.app", hashed_password="seeded", is_active=True))
+            db.commit()
+    finally:
+        db.close()
+
 origins = [
     "http://localhost:3000",
 ]
